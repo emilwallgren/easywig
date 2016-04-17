@@ -11,6 +11,7 @@ $(document).ready(function() {
   //Create html
   $("#easywig").append('<div id="easywig-title-container"><label for="title" id="easywig-label">Title</label><br><input type="text" name="title" id="easywig-title"></div><div id="easywig-container"><label for="content" id="easywig-label">Content</label><br><div id="easywig-buttons"><button id="bold"><i class="fa fa-bold"></i></button><button id="italic"><i class="fa fa-italic"></i></button><button id="link"><i class="fa fa-link"></i></button><button id="unlink"><i class="fa fa-unlink"></i></button><button id="aLeft"><i class="fa fa-align-left"></i></button><button id="aCenter"><i class="fa fa-align-center"></i></button><button id="aRight"><i class="fa fa-align-right"></i></button><button id="strikeThrough"><i class="fa fa-strikethrough"></i></button><button id="list"><i class="fa fa-list"></i></button><i class="fa fa-underline colors"><input type=color name="underlineColor" id="underlineColor"></i><i class="fa fa-paint-brush colors"><input type=color name="backgroundColor" id="backgroundColor"></i><select id="font-size"><option value="p">Paragpraph</option><option value="H1">Heading 1</option><option value="H2">Heading 2</option><option value="H3">Heading 3</option><option value="H4">Heading 4</option><option value="H5">Heading 5</option></select><i class="fa fa-th-large" id="resize"></i><br><button id="visual">Visual</button><button id="code">Code</button></div><textarea id="easywig-textarea" style="display:none;"></textarea><iframe id="easywigTextarea" name="content"></iframe><div id="easywig-text-counter"><p>Word Count: <span id="easywig-word-count">0</span></p></div></div><button id="easywig-submit">Publish</button>');
 
+   /******** CSS *********/
   //Create css for #easywig
   $('#easywig').css({
     "width" : "800px",
@@ -162,6 +163,8 @@ $(document).ready(function() {
 
   $('.bigBox #easywig-textarea, .bigBox #easywigTextarea').css({
     "height" : "85vh !important"});
+  
+  /***************************/
 
   //Define variables for textarea, title and iframe
   var textArea = document.getElementById('easywig-textarea');
