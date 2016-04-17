@@ -2,16 +2,18 @@ $(document).ready(function() {
 
   /******** SETTINGS *********/
 
-  //Set autosave/keyup url
-  var url = '../easywigajax.php';
-  //Set publish url
+  //Set autosave/keyup url for AJAX
+  var autosaveURL = '';
+  // Set informationgrabber url for AJAX
+  var grabberURL = '';
+  //Set publish url for AJAX
+  var publishURL = '';
 
   /***************************/
 
   //Create html
-  $("#easywig").append('<div id="easywig-title-container"><label for="title" id="easywig-label">Title</label><br><input type="text" name="title" id="easywig-title"></div><div id="easywig-container"><label for="content" id="easywig-label">Content</label><br><div id="easywig-buttons"><button id="bold"><i class="fa fa-bold"></i></button><button id="italic"><i class="fa fa-italic"></i></button><button id="link"><i class="fa fa-link"></i></button><button id="unlink"><i class="fa fa-unlink"></i></button><button id="aLeft"><i class="fa fa-align-left"></i></button><button id="aCenter"><i class="fa fa-align-center"></i></button><button id="aRight"><i class="fa fa-align-right"></i></button><button id="strikeThrough"><i class="fa fa-strikethrough"></i></button><button id="list"><i class="fa fa-list"></i></button><i class="fa fa-underline colors"><input type=color name="underlineColor" id="underlineColor"></i><i class="fa fa-paint-brush colors"><input type=color name="backgroundColor" id="backgroundColor"></i><select id="font-size"><option value="p">Paragpraph</option><option value="H1">Heading 1</option><option value="H2">Heading 2</option><option value="H3">Heading 3</option><option value="H4">Heading 4</option><option value="H5">Heading 5</option></select><i class="fa fa-th-large" id="resize"></i><br><button id="visual">Visual</button><button id="code">Code</button></div><textarea id="easywig-textarea" style="display:none;"></textarea><iframe id="easywigTextarea" name="content"></iframe><div id="easywig-text-counter"><p>Word Count: <span id="easywig-word-count">0</span></p></div></div><button id="easywig-submit">Publish</button>');
+  $("#easywig").append('<div id="easywig-title-container"><label for="title" id="easywig-label">Title</label><br><input type="text" name="title" id="easywig-title"></div><div id="easywig-container"><label for="content" id="easywig-label">Content</label><br><div id="easywig-buttons"><button id="bold"><i class="fa fa-bold"></i></button><button id="italic"><i class="fa fa-italic"></i></button><button id="link"><i class="fa fa-link"></i></button><button id="unlink"><i class="fa fa-unlink"></i></button><button id="aLeft"><i class="fa fa-align-left"></i></button><button id="aCenter"><i class="fa fa-align-center"></i></button><button id="aRight"><i class="fa fa-align-right"></i></button><button id="strikeThrough"><i class="fa fa-strikethrough"></i></button><button id="list"><i class="fa fa-list"></i></button><i class="fa fa-underline colors"><input type=color name="underlineColor" id="underlineColor"></i><i class="fa fa-paint-brush colors"><input type=color name="backgroundColor" id="backgroundColor"></i><select id="font-size"><option value="p">Paragpraph</option><option value="H1">Heading 1</option><option value="H2">Heading 2</option><option value="H3">Heading 3</option><option value="H4">Heading 4</option><option value="H5">Heading 5</option></select><br><button id="visual">Visual</button><button id="code">Code</button></div><textarea id="easywig-textarea" style="display:none;"></textarea><iframe id="easywigTextarea" name="content"></iframe><div id="easywig-text-counter"><p>Word Count: <span id="easywig-word-count">0</span></p></div></div><button id="easywig-submit">Publish</button>');
 
-   /******** CSS *********/
   //Create css for #easywig
   $('#easywig').css({
     "width" : "800px",
@@ -147,24 +149,7 @@ $(document).ready(function() {
     "-moz-box-shadow" : "0px 3px 29px 0px rgba(0, 0, 0, 0.75)",
     "box-shadow" : "0px 3px 29px 0px rgba(0, 0, 0, 0.75)"});
 
-  //Create css for .bigBox
-  $('.bigBox').css({
-    "position" : "fixed",
-    "display" : "block",
-    "z-index" : "1000",
-    "top" : "-18px",
-    "right" : "0",
-    "bottom" : "0",
-    "left" : "0",
-    "height" : "100vh"});
 
-  $('.bigBox label').css({
-    "display" : "none"});
-
-  $('.bigBox #easywig-textarea, .bigBox #easywigTextarea').css({
-    "height" : "85vh !important"});
-  
-  /***************************/
 
   //Define variables for textarea, title and iframe
   var textArea = document.getElementById('easywig-textarea');
@@ -250,7 +235,7 @@ $(document).ready(function() {
     var textVal = textArea.value;
     textVal = window.frames['content'].document.body.innerHTML;
     //alert("Title:" + titleVal + ". Body: " + textVal);
-    $.ajax({url: url + '?type=publish', data: {title: titleVal, text: textVal}, type: 'POST'});
+    $.ajax({url: publishURL, data: {title: titleVal, text: textVal}, type: 'POST'});
   });
 
   //Autosave iframe on Keyup
@@ -259,7 +244,7 @@ $(document).ready(function() {
     var titleVal = title.value;
     var textVal = textArea.value;
     textVal = window.frames['content'].document.body.innerHTML;
-    $.ajax({url: url + '?type=keyup', data: {title: titleVal, text: textVal}, type: 'POST'});
+    $.ajax({url: autosaveURL, data: {title: titleVal, text: textVal}, type: 'POST'});
 
     var countedWords = WordCount(textVal);
     var wordCountOutput = document.getElementById('easywig-word-count');
@@ -270,7 +255,7 @@ $(document).ready(function() {
   $('#easywig-textarea').on('keyup', function() {
     var titleVal = title.value;
     var textVal = textArea.value;
-    $.ajax({url: url + '?type=keyup', data: {title: titleVal, text: textVal}, type: 'POST'});
+    $.ajax({url: autosaveURL, data: {title: titleVal, text: textVal}, type: 'POST'});
 
     var countedWords = WordCount(textVal);
     var wordCountOutput = document.getElementById('easywig-word-count');
@@ -281,8 +266,7 @@ $(document).ready(function() {
   $('#code').click(function() {
     $('#easywig-textarea').css("display", "block");
     $('#easywigTextarea').css("display", "none");
-    var graburl = url + '?type=grab';
-    $.ajax({url: graburl, type: 'GET', success: function(content) {
+    $.ajax({url: grabberURL, type: 'GET', success: function(content) {
       $('#easywig-textarea').html(content);
     }});
   });
@@ -291,67 +275,9 @@ $(document).ready(function() {
   $('#visual').click(function() {
     $('#easywig-textarea').css("display", "none");
     $('#easywigTextarea').css("display", "block");
-    var graburl = url + '?type=grab';
-    $.ajax({url: graburl, type: 'GET', success: function(content) {
+    $.ajax({url: grabberURL, type: 'GET', success: function(content) {
       window.frames['content'].document.body.innerHTML = content;
     }});
   });
-
-
-
-  //Display full-page editor on click
-  $('#resize').click(function() {
-    $('#easywig-container').toggleClass("bigBox");
-  });
-  //Display full-page editor on click
-  /*
-  $('#resize').click(function() {
-    $('#easywig-container').fadeIn(1000, function() {
-      $('#easywig-container').toggle(function() {
-        $('#easywig #easywig-container').css({
-          "position" : "fixed",
-          "display" : "block",
-          "z-index" : "1000",
-          "top" : "-18px",
-          "right" : "0",
-          "bottom" : "0",
-          "left" : "0",
-          "height" : "100vh"});
-
-        $('#easywig-container label').css({
-          "display" : "none"});
-
-        $('#easywig-container #easywig-textarea, #easywig-container #easywigTextarea').css({
-          "height" : "85vh !important"});
-      }, function() {
-        $('#easywig #easywig-container').css({
-          "position" : "static",
-          "z-index" : "",
-          "top" : "",
-          "right" : "",
-          "bottom" : "left",
-          "left" : "",
-          "width" : "800px",
-          "height" : "630px",
-          "background-color" : "#f2f2f2",
-          "border-radius" : "5px",
-          "display" : "block",
-          "margin" : "0 auto",
-          "padding" : "20px",
-          "margin-bottom" : "30px"});
-
-        $('#easywig #easywig-container label').css({
-          "display" : "block"});
-
-        $('#easywig #easywig-container #easywig-textarea, #easywig-container #easywigTextarea').css({
-          "height" : "400px"});
-      });
-    });
-  }); */
-
-
-
-
-
 
 });
