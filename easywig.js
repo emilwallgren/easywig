@@ -48,17 +48,17 @@ $(document).ready(function() {
     "margin" : "0 auto",
     "margin-bottom" : "30px"});
 
-  //Create css for #easywig
+  //Create css for #easywig-label
   $('#easywig #easywig-container #easywig-label').css({
     "font-size" : "20px"});
 
-  //Create css for #easywig
+  //Create css for #easywig-buttons
   $('#easywig #easywig-container #easywig-buttons').css({
     "width" : "100%",
     "height" : "80px",
     "background-color" : "#e6e6e6"});
 
-  //Create css for #easywig
+  //Create css for #easywig-buttons button
   $('#easywig #easywig-container #easywig-buttons button').css({
     "width" : "30px",
     "height" : "30px",
@@ -70,36 +70,31 @@ $(document).ready(function() {
     "border" : "1px solid gray",
     "background-color": "white"});
 
-  //Create css for #easywig
+  //Create css for #easywig-buttons button i (fontawesome)
   $('#easywig #easywig-container #easywig-buttons button i').css({
     "font-size" : "17px"});
 
-  //Create css for #easywig
+  //Create css for #easywig-color-styles-input
   $('#easywig #easywig-container #easywig-buttons button i input').css({
     "width" : "22px"});
 
-  //Create css for #easywig
+  //Create css for #easywig-color-pickers
   $('#easywig #easywig-container #easywig-buttons .colors').css({
     "margin-left" : "10px",
     "margin-right" : "10px"});
 
-  //Create css for #easywig
+  //Create more css for #easywig-color-styles-input
   $('#easywig #easywig-container #easywig-buttons .colors input').css({
     "width" : "22px"});
 
-  //Create css for #easywig
+  //Create css for #easywig code-editor-button
   $('#easywig #easywig-container #easywig-buttons #visual, #easywig #easywig-container #easywig-buttons #code').css({
     "width" : "210px",
     "height" : "24px",
     "text-align" : "center",
     "margin-left" : "10px"});
 
-  //Create css for #easywig
-  $('#easywig #easywig-container #easywig-buttons #resize').css({
-    "font-size" : "22px",
-    "margin-left" : "33px"});
-
-  //Create css for #easywig
+  //Create css for #easywig iframe-textarea
   $('#easywig #easywig-container #easywigTextarea').css({
     "width" : "100%",
     "height" : "400px",
@@ -107,7 +102,7 @@ $(document).ready(function() {
     "border-color" : "transparent",
     "border" : "none"});
 
-  //Create css for #easywig
+  //Create css for #easywig textarea
   $('#easywig #easywig-container #easywig-textarea').css({
     "width" : "100%",
     "height" : "400px",
@@ -115,14 +110,14 @@ $(document).ready(function() {
     "background-color" : "white",
     "border" : "none"});
 
-  //Create css for #easywig
+  //Create css for #easywig word-counter
   $('#easywig #easywig-container #easywig-text-counter').css({
     "width" : "100%",
     "height" : "20px",
     "margin-top" : "-15px",
     "background-color" : "#e6e6e6"});
 
-  //Create css for #easywig
+  //Create css for #easywig submitbutton
   $('#easywig #easywig-submit').css({
     "width" : "100%",
     "display" : "block",
